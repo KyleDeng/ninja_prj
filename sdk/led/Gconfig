@@ -1,0 +1,25 @@
+comment "config of sdk->led"
+menuconfig ENABLE_LED
+    bool "enable ENABLE_LED"
+    default y
+    if (ENABLE_LED)
+        config LED_HEX
+            hex "LED_HEX: hex test"
+            range 0x00 0x10
+            default 0x00
+
+        choice
+            prompt "this a new choice"
+            default LED_CHOICE_C 
+
+            config LED_CHOICE_A
+                bool "bool conifg A"
+
+            config LED_CHOICE_B
+                bool "bool config B"
+
+            config LED_CHOICE_C
+                bool "bool config C"
+        endchoice
+    endif
+

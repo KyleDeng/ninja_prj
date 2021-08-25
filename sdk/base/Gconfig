@@ -1,0 +1,19 @@
+comment "config of sdk->base"
+menuconfig ENABLE_BASE
+    bool "enable ENABLE_BASE"
+    default n
+    if (ENABLE_BASE)
+        config COMPONENTS_EXCLUDE_LIST
+            string "COMPONENTS_EXCLUDE_LIST: input exclude component name"
+            default ""
+            ---help---
+                If the correct component name is counted, 
+                the component .o will not be created.
+        config SDK_OBJS_EXCLUDE
+            string "SDK_OBJS_EXCLUDE: input exclude component name"
+            default ""
+            ---help---
+                If the correct component name is counted, 
+                the component .o will not appear in the libtuya_iot.a
+    endif
+

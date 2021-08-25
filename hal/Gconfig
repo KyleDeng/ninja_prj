@@ -1,0 +1,11 @@
+comment "config of hal"
+menuconfig ENABLE_HAL
+    bool "enable ENABLE_HAL"
+    default n
+    if (ENABLE_HAL)
+        config HAL_HEX
+            hex "HAL_HEX: hex test"
+            range 0x00 0x10
+            default 0x00
+    endif
+

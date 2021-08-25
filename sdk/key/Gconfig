@@ -1,0 +1,14 @@
+comment "config of sdk->key"
+menuconfig ENABLE_KEY
+    bool "enable ENABLE_KEY"
+    default y
+    if (ENABLE_KEY)
+        config KEY_BOOL
+            bool "KEY_BOOL: bool test"
+            default y
+        config KEY_NUMBER
+            int "KEY_NUMBER: int test"
+            range 0 99
+            default 9
+    endif
+

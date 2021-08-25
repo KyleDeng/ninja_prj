@@ -1,0 +1,6 @@
+# configList
+mainmenu "Project Configuration"
+source sdk/base/Gconfig
+source sdk/key/Gconfig
+source sdk/led/Gconfig
+source hal/Gconfig
