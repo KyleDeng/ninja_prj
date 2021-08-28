@@ -1,0 +1,46 @@
+ninja_required_version = 1.3
+
+CC = gcc
+AR = ar
+CFLAGS = -Wall
+
+builddir = output
+
+# 一些全局变量
+INC_DIRS =
+OBJ_LIST =
+
+pool object
+    depth = 4
+
+rule Debug
+    command = echo debug: ${in}
+
+rule Object
+    command = $CC $CFLAGS -c $in ${INC_DIRS} -o $out
+    description = $CC $CFLAGS -c $in ${INC_DIRS} -o $out
+    pool = object
+
+rule Library
+    command = ${AR} rcs ${out} ${OBJ_LIST}
+
+rule ProgramMain
+    command = ${CC} -o ${out} ${builddir}/main.o -L${builddir} -lcode
+
+include ./code/hello/hello.ninja
+include ./code/goodbye/goodbye.ninja
+build ${builddir}/libcode.a: Library
+build code: phony ${builddir}/libcode.a
+# 不能用以下语法，ninja会把整个${OBJ_LIST}，当成一个依赖
+# build ${builddir}/libcode.a: Library ${OBJ_LIST}
+
+build ${builddir}/main.o: Object main.c
+build main: phony ${builddir}/main.o
+
+build ${builddir}/out: ProgramMain
+build out: phony ${builddir}/out
+
+
+# 设置默认目标
+default hello goodbye main code
+

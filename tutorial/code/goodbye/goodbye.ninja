@@ -1,0 +1,8 @@
+LOCAL_PATH = ./code/goodbye
+
+build ${builddir}/goodbye.o: Object ${LOCAL_PATH}/goodbye.c
+
+build goodbye: phony ${builddir}/goodbye.o
+
+INC_DIRS = ${INC_DIRS} -I./code/goodbye
+OBJ_LIST = ${OBJ_LIST} ${builddir}/goodbye.o
